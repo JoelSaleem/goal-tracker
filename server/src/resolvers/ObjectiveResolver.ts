@@ -47,4 +47,19 @@ export class ObjectiveResolver {
 
     return objectives
   }
+
+  @Query(() => [Objective])
+  async getOKR(@Ctx() ctx: MyContext): Promise<Objective[] | undefined> {
+    const userId = ctx.req.session?.userId
+    if (!userId) {
+      return undefined
+    }
+
+    const objectives = await Objective.createQueryBuilder('objective')
+      .leftJoinAndSelect('objective.keyResults', 'keyResult')
+      .where(`objective.user = ${userId}`)
+      .getMany()
+
+    return objectives
+  }
 }

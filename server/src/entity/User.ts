@@ -7,6 +7,7 @@ import {
 } from 'typeorm'
 import { Field, ObjectType } from 'type-graphql'
 import { Objective } from './Objective'
+import { KeyResult } from './KeyResult'
 
 @ObjectType()
 @Entity()
@@ -24,4 +25,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Objective, (objective) => objective.user)
   objectives: Objective[]
+
+  @OneToMany(() => KeyResult, (KeyResult) => KeyResult.user)
+  keyResults: KeyResult[]
 }

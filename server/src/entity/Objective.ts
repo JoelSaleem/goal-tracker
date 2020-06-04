@@ -21,12 +21,15 @@ export class Objective extends BaseEntity {
   @Column('text')
   title: string
 
+  @Field()
   @Column()
   targetDate: number
 
+  @Field()
   @Column()
   created: number
 
+  @Field(() => [KeyResult])
   @OneToMany(() => KeyResult, (keyResult) => keyResult.objective)
   keyResults: KeyResult[]
 

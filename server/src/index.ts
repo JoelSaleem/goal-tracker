@@ -7,6 +7,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import { AuthResolver } from './resolvers/AuthResolver'
 import { ObjectiveResolver } from './resolvers/ObjectiveResolver'
+import { KeyResultsResolver } from './resolvers/KeyResultsResolver'
 
 // I like to use redis for this: https://github.com/tj/connect-redis
 const SQLiteStore = connectSqlite3(session)
@@ -40,7 +41,7 @@ const SQLiteStore = connectSqlite3(session)
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [AuthResolver, ObjectiveResolver],
+      resolvers: [AuthResolver, ObjectiveResolver, KeyResultsResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({ req, res }),
