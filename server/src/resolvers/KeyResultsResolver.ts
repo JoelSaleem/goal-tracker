@@ -26,7 +26,10 @@ export class KeyResultsResolver {
       }
     }
 
-    const objective = await Objective.findOne(objectiveId)
+    const objective = await Objective.findOne({
+      id: objectiveId,
+      user: userId,
+    })
 
     const keyResult = await KeyResult.create({
       created: Date.now(),
