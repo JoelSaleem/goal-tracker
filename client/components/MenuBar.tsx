@@ -22,7 +22,7 @@ export const MenuBar = ({ buttons }: MenuBarProps) => {
   const renderButtons = () => {
     return buttons.map(({ id, path, title }) => {
       return (
-        <MenuButton id={id} path={path} isSelected={false}>
+        <MenuButton key={id} path={path} isSelected={false}>
           {title}
         </MenuButton>
       )

@@ -31,23 +31,15 @@ const Button = styled.a`
 `
 
 interface MenuButtonProps {
-  id: string
   isSelected: boolean
   path: string
   children: string | ReactElement
 }
 
-export const MenuButton = ({
-  id,
-  children,
-  isSelected,
-  path,
-}: MenuButtonProps) => {
+export const MenuButton = ({ children, isSelected, path }: MenuButtonProps) => {
   return (
     <Link href={path}>
-      <Button key={id} id={isSelected && 'selected'}>
-        {children}
-      </Button>
+      <Button id={isSelected ? 'selected' : ''}>{children}</Button>
     </Link>
   )
 }
