@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { MenuBar } from './MenuBar'
 import { MenuBtnInfo } from './MenuBar'
-import { ReactElement, ReactChild, ReactChildren } from 'react'
+import { ReactChild, ReactChildren } from 'react'
+import { useAuthed } from '../hooks/useAuthed'
 
 const BodyContainer = styled.div`
   padding-left: 12px;
@@ -11,7 +12,7 @@ const BodyContainer = styled.div`
   height: 100%;
 `
 
-const menuButtons: MenuBtnInfo[] = [
+const getMenuButtons = (isAuthed: boolean): MenuBtnInfo[] => [
   {
     id: 'home',
     title: 'Home',
@@ -29,7 +30,7 @@ const menuButtons: MenuBtnInfo[] = [
   },
   {
     id: 'auth',
-    title: 'Login',
+    title: isAuthed ? 'Logout' : 'Login',
     path: '/login',
   },
 ]
@@ -40,9 +41,10 @@ interface CoreLayoutProps {
 }
 
 export const CoreLayout = ({ children, title }: CoreLayoutProps) => {
+  const { loggedInUser } = useAuthed()
   return (
     <BodyContainer>
-      <MenuBar buttons={menuButtons} />
+      <MenuBar buttons={getMenuButtons(!!loggedInUser)} />
       <h2>{title}</h2>
       {children}
     </BodyContainer>
